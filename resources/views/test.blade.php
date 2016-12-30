@@ -9,7 +9,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <span>科研人员基础信息</span>
-                    <span class="pull-right">当前已选则<i id="selected-count" class="select-count">0</i>项</span>
+                    <span class="pull-right">当前已选择<i id="selected-count" class="select-count">0</i>项</span>
                 </div>
                 <div class="panel-body">
                     <!-- TAB NAVIGATION -->
@@ -21,8 +21,8 @@
                     <table style="margin-top:8px;" class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th id="check-all" style="width: 10px;"><input type="checkbox" value=""></th>
-                            <th>编号</th>
+                            <th id="check-all" style="width: 30px;"><input type="checkbox" value=""></th>
+                            <th style="width: 25%">编号</th>
                             <th>姓名</th>
                             <th>年龄</th>
                             <th>状态</th>
@@ -32,7 +32,12 @@
                         <tbody>
                         <tr>
                             <td class="check-all"><input type="checkbox" value=""></td>
-                            <td>1</td>
+                            <td class="text-left">
+                                <p><span class="text-red">发货时间：</span>{{date('Y-m-d H:i')}}</p>
+                                <p><span class="text-green">上传时间：</span>{{date('Y-m-d H:i')}}</p>
+                                <p><span class="text-orange">付款时间：</span>{{date('Y-m-d H:i')}}</p>
+                                <p><span class="text-lightblue">同步时间：</span>{{date('Y-m-d H:i')}}</p>
+                            </td>
                             <td>1</td>
                             <td>1</td>
                             <td>1</td>
@@ -171,7 +176,16 @@
 
 <style>
     body{font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;}
+    table {table-layout: fixed;word-wrap: break-word;}
+    table th{background-color: #d9edf7;font-size: small;text-align: center;}
+    table td{text-align: center;font-size: smaller;}
     .select-count{margin-left: 5px;margin-right: 5px; color: orangered;}
-    th{background-color: #d9edf7;font-size: small;text-align: center}
-    td{text-align: center;font-size: smaller}
+    .text-left{text-align: left}
+    .text-center{text-align: center}
+    .text-right{text-align: right}
+    .text-red{color: red}
+    .text-green{color: green}
+    .text-yellow{color: yellow}
+    .text-orange{color: orange}
+    .text-lightblue{color: lightblue}
 </style>
