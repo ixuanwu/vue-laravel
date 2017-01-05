@@ -8,19 +8,60 @@ use Illuminate\Http\Request;
 class TestController extends Controller
 {
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('home');
+        $stu[]     = [
+            'id'=>23232,
+            'name'=>'蒋和超',
+            'grade'=>'2011级',
+            'major'=>'网络工程',
+        ];
+        $stu[]     = [
+            'id'=>23234,
+            'name'=>'蒋和超',
+            'grade'=>'2011级',
+            'major'=>'网络工程',
+        ];
+        $stu[]     = [
+            'id'=>23236,
+            'name'=>'蒋和超',
+            'grade'=>'2011级',
+            'major'=>'网络工程',
+        ];
+        $stu[]     = [
+            'id'=>23237,
+            'name'=>'蒋和超',
+            'grade'=>'2011级',
+            'major'=>'网络工程',
+        ];
+        $teacher[] = [
+            'id'=>12323,
+            'name'=>'费立国',
+            'age'=>'10',
+            'time'=>time(),
+            'stu' =>$stu,
+        ];
+        $teacher[] = [
+            'id'=>12324,
+            'name'=>'费立国',
+            'age'=>'10',
+            'time'=>time(),
+            'stu' =>$stu,
+        ];
+        $teacher[] = [
+            'id'=>12325,
+            'name'=>'费立国',
+            'age'=>'10',
+            'time'=>time(),
+            'stu' =>$stu,
+        ];
+        sleep(1);
+        return $teacher;
     }
 
     public function test(){
-        $htmlString = view('test')->__toString();
-        return $htmlString;
-        \Cache::put("test:html",$htmlString,60);
+        return view('test');
     }
+
+
 }

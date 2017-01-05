@@ -22,7 +22,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('blog', ['as' => 'web.blog', 'uses' => 'PagesController@home']);
     Route::get('/blog/{posts}', ['as' => 'web.post', 'uses' => 'PagesController@post']);
     Route::get('/category/{categories}', ['as' => 'web.category', 'uses' => 'PagesController@category']);
-    Route::get('/test','TestController@test');
+    Route::get('/manage-test','TestController@test');
+    Route::get('/test','TestController@index');
 
 });
 
