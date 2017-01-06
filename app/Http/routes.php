@@ -27,6 +27,14 @@ Route::group(['middleware' => 'web'], function () {
 
 });
 
+/******************************
+ * 测试子路由
+ */
+Route::group(['domain'=>'test.vuedo.laravel.com','middleware'=>'web'],function(){
+    Route::get('/manage-test','TestController@test');
+    Route::get('/test','TestController@index');
+});
+
 /*
 |--------------------------------------------------------------------------
 | API Routes

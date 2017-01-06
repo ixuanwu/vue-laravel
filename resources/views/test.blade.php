@@ -5,13 +5,50 @@
 <link rel="stylesheet" href="/lte/css/AdminLTE.css">
 <link rel="stylesheet" href="/lte/css/skin-blue.min.css">
 <!-- Latest compiled and minified JS -->
-<script src="//cdn.bootcss.com/moment.js/2.17.1/moment.js"></script>
-<script src="//cdn.bootcss.com/moment.js/2.17.1/moment-with-locales.min.js"></script>
-<script src="//cdn.bootcss.com/vue/2.1.8/vue.js"></script>
-<script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.js"></script>
-<script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style>
+    body {
+        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+    }
+    [v-cloak] {
+        display: none;
+    }
+    table {
+        table-layout: fixed;
+        word-wrap: break-word;
+    }
+    table th {
+        background-color: #d9edf7;
+        font-size: small;
+        text-align: center;
+    }
+    table td {
+        text-align: center;
+        font-size: smaller;
+    }
+    .select-count {
+        margin-left: 5px;
+        margin-right: 5px;
+        color: orangered;
+    }
+    .alert-center {
+        width: 50%;
+        height: 50%;
+        overflow: auto;
+        margin: auto;
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+    }
+</style>
 <script src="/lte/js/app.min.js"></script>
+<div class="alert-center" style="display: none">
+    <div class="alert alert-danger alert-dismissible fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-ban"></i> 错误提醒</h4>
+        您的输入有误，请重新输入<br>
+        您的输入有误，请重新输入<br>
+        您的输入有误，请重新输入<br>
+    </div>
+</div>
 <div class="container" id="app">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -31,6 +68,7 @@
                         <div class="box-body">
                             <a class="btn btn-success btn-xs" id="select-all">全选</a>
                             <a class="btn btn-info btn-xs" id="collapse-all">折叠</a>
+                            <a class="btn btn-info btn-xs" id="show-alert">警告</a>
                         </div>
                     </div>
                     <div class="box box-primary box-solid" v-for="item in items">
@@ -89,7 +127,13 @@
         </div>
     </div>
 </div>
-
+<script src="//cdn.bootcss.com/moment.js/2.17.1/moment.js"></script>
+<script src="//cdn.bootcss.com/moment.js/2.17.1/moment-with-locales.min.js"></script>
+<script src="//cdn.bootcss.com/vue/2.1.8/vue.js"></script>
+<script src="//cdn.bootcss.com/vue-resource/1.0.3/vue-resource.js"></script>
+<script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="{{asset('js/colResizable-1.6.min.js')}}"></script>
 <script>
     $(function () {
         var flag = true;
@@ -120,7 +164,17 @@
         function getCheckedNumber() {
             $('#selected-count').html($('input[role=check-order]:checked').length);
         }
+        $('#show-alert').click(function(){
+            showAlert();
+        });
+        function showAlert(){
+            $('.alert-center').slideDown();
+            setTimeout(function(){
+                $('.alert-center').slideUp();
+            },2000)
+        }
     });
+
     var app = new Vue({
         el:'#app',
         data:{
@@ -149,6 +203,7 @@
         },
         mounted:function(){
             this.fetchData();
+            $('table').colResizable();
         },
         computed:{
             checkedCount:function(){
@@ -162,30 +217,3 @@
         },
     });
 </script>
-
-<style>
-    body {
-        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
-    }
-    [v-cloak] {
-        display: none;
-    }
-    table {
-        table-layout: fixed;
-        word-wrap: break-word;
-    }
-    table th {
-        background-color: #d9edf7;
-        font-size: small;
-        text-align: center;
-    }
-    table td {
-        text-align: center;
-        font-size: smaller;
-    }
-    .select-count {
-        margin-left: 5px;
-        margin-right: 5px;
-        color: orangered;
-    }
-</style>
