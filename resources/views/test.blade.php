@@ -39,7 +39,6 @@
         top: 0; left: 0; bottom: 0; right: 0;
     }
 </style>
-<script src="/lte/js/app.min.js"></script>
 <div class="alert-center" style="display: none">
     <div class="alert alert-danger alert-dismissible fade in">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -98,7 +97,7 @@
                                     <td>@{{ item.name }}</td>
                                     <td>@{{ item.age }}</td>
                                     <td>有效</td>
-                                    <td>@{{ item.time }}</td>
+                                    <td>@{{ item.time|moment }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -134,6 +133,7 @@
 <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="{{asset('js/colResizable-1.6.min.js')}}"></script>
+<script src="/lte/js/app.min.js"></script>
 <script>
     $(function () {
         var flag = true;
@@ -174,7 +174,13 @@
             },2000)
         }
     });
-
+    //全局过滤器
+    Vue.filter('moment',function(unixTimeStamp,format){
+        if(format==undefined){
+            format = 'YYYY-MM-DD hh:mm';
+        }
+        return moment.unix(unixTimeStamp).format(format);
+    });
     var app = new Vue({
         el:'#app',
         data:{
@@ -215,5 +221,10 @@
                 console.log(this.checkedItem);
             }
         },
+        filters:{
+            moment:function(unixTimeStamp){
+                return moment.unix(unixTimeStamp).format('YYYY-MM-DD HH:mm:ss');
+            }
+        }
     });
 </script>
